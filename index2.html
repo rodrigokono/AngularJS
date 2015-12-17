@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+
+    <script src="app/app-conf.js"></script>
+    <script src="app/controller/index-controller.js"></script>
+</head>
+<body ng-app="rw">
+    <div ng-controller="IndexController3" class="container">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cadastro de Pessoa</h3>
+            </div>
+            <div class="panel-body">
+                <form name="myForm" novalidate>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="tiNome">Nome</label>
+                            <input type="text" class="form-control" id="tiNome" name="tiNome"
+                                   required ng-maxlength="50" ng-minlength="10"
+                                   placeholder="Informe o nome" ng-model="entidade.nome">
+
+                            <div ng-messages="myForm.tiNome.$error">
+                                <p ng-message="required">Campo obrigatório</p>
+                                <p ng-message="maxlength">Campo muito longo</p>
+                                <p ng-message="minlength">Campo muito curto</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="tiNascimento">Nascimento</label>
+                            <input type="date" class="form-control" id="tiNascimento" name="tiNascimento" required ng-model="entidade.nascimento">
+                            <div ng-messages="myForm.tiNascimento.$error">
+                                <p ng-message="required">Campo obrigatório</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="tiSexo">Sexo</label>
+                            <select class="form-control" id="tiSexo" name="tiSexo" required ng-model="entidade.sexo">
+                                <option>Masculino</option>
+                                <option>Feminino</option>
+                            </select>
+                            <div ng-messages="myForm.tiSexo.$error">
+                                <p ng-message="required">Campo obrigatório</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Nascimento</th>
+                        <th>Sexo</th>
+                    </tr>
+                    <tr ng-repeat="pessoa in listaDePessoas">
+                        <td ng-bind="pessoa.nome"></td>
+                        <td ng-bind="pessoa.nascimento | date:'dd/MM/yyyy'"></td>
+                        <td ng-bind="pessoa.sexo"></td>
+                    </tr>
+                </table>
+
+                <button type="submit" class="btn btn-primary" ng-click="salvar()" ng-disabled="myForm.$invalid">
+                    <i class="fa fa-save"></i>
+                    Gravar
+                </button>
+                <button type="submit" class="btn btn-warning" ng-click="limpar()">
+                    <i class="fa fa-eraser"></i>
+                    Limpar
+                </button>
+                <button type="submit" class="btn btn-danger" ng-click="excluir()">
+                    <i class="fa fa-trash"></i>
+                    Excluir
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

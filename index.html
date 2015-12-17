@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app-conf.js"></script>
+    <script src="app/controller/index-controller.js"></script>
+</head>
+<body ng-app="rw">
+    <div ng-controller="IndexController">
+        {{nome}}
+
+        <span ng-bind="nome"></span>
+        <input ng-model="nome">
+
+        <button ng-click="onClickTeste()">Teste</button>
+
+        <label>Cor</label>
+        <input ng-model="myStyle.backgroundColor">
+
+        <label>Altura</label>
+        <input ng-model="myStyle.height">
+
+        <label>Largura</label>
+        <input ng-model="myStyle.width">
+
+        <div ng-style="myStyle"></div>
+
+        <br><br>
+
+        <div style="width: 100px; height: 100px;" ng-class="myClass"></div>
+
+    </div>
+</body>
+</html>
