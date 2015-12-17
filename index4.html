@@ -2,9 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
+    <script src="app/app-conf.js"></script>
+    <script src="app/controller/index-contorller4.js"></script>
+    <script src="app/service/alert-service.js"></script>
+    <script src="app/filter/maiusculo.js"></script>
+
+</head>
+
+<body ng-app="rw" ng-controller="IndexController4" >
+<div  class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            Cadastro
+        </div>
+        <div class="panel-body">
+            <form name="myForm" novalidate>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group"
+                             ng-class="{'has-error':myForm.tiNome.$touched && myForm.tiNome.$invalid}">
+                            <label for="tiNome">Nome</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="tiNome"
+                                   ng-model="entidade.nome"
+                                   name="tiNome"
+                                   placeholder="Nome"
+                                   ng-minlength="5"
+                                   ng-maxlength="10"
+                                   required>
+                            <div class="help-block" ng-messages="myForm.tiNome.$error"
+                                 ng-if="myForm.tiNome.$invalid && myForm.tiNome.$touched">
+                                <div ng-messages-include="app/messages/messages-default.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="tiNascimento">Nascimento</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="tiNascimento"
+                                   name="tiNascimento"
+                                   ng-model="entidade.nascimento"
+                                   required>
+                            <div  class="help-block" ng-messages="myForm.tiNascimento.$error"
+                                  ng-if="myForm.tiNome.$invalid && myForm.tiNome.$touched">
+                                <div ng-messages-include="app/messages/messages-default.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="tiSexo">Sexo</label>
+                            <select class="form-control"
+                                    ng-model="entidade.sexo"
+                                    name="tiSexo"
+                                    id="tiSexo"
+                                    required>
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                            </select>
+                            <div class="help-block" ng-messages="myForm.tiNascimento.$error"
+                                 ng-if="myForm.tiNome.$invalid && myForm.tiNome.$touched">
+                                <div ng-messages-include="app/messages/messages-default.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn-primary" ng-click="salvar()">
+                <i class="fa fa-save"></i>
+                Salvar
+            </button>
+            <button class="btn-success" ng-click="limpar()">
+                <i class="fa fa-eraser"></i>
+                Limpar
+            </button>
+            <button class="btn-danger" ng-click="excluir()">
+                <i class="fa fa-trash"></i>
+                Excluir
+            </button>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>Sexo</th>
+
+        </tr>
+        <tr ng-repeat="pessoa in listaDePessoas">
+            <!--one time bind :: -->
+            <td ng-bind="::pessoa.nome | maiusculo:'maiusculo'"></td>
+            <td ng-bind="::pessoa.nascimento | date:'dd/MM/yyyy'"></td>
+            <td ng-bind="::pessoa.sexo"></td>
+        </tr>
+
+    </table>
+
+
+</div>
 </body>
 </html>
